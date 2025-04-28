@@ -55,7 +55,7 @@ class MoviePicker {
         
         this.card.style.transform = `translateX(${this.currentX}px) rotate(${rotation}deg)`;
         
-        // Add swipe direction classes
+        // Swipe direction classes
         if (this.currentX > 0) {
             this.card.classList.add('swipe-right');
             this.card.classList.remove('swipe-left');
@@ -111,7 +111,6 @@ class MoviePicker {
             this.isLoading = true;
             this.card.classList.add('loading');
             
-            // First, get total pages available
             let endpoint;
             if (previousMovieId === null) {
                 // Initial load - get popular movies
@@ -138,11 +137,9 @@ class MoviePicker {
             if (!initialResponse.ok) throw new Error(`HTTP error! status: ${initialResponse.status}`);
             const initialData = await initialResponse.json();
             
-            // Calculate random page within available range
             const totalPages = Math.min(initialData.total_pages, 5); // Cap at 5 pages
             const page = totalPages > 1 ? Math.floor(Math.random() * totalPages) + 1 : 1;
             
-            // Get data from random page if needed
             let data = initialData;
             if (page > 1) {
                 endpoint = endpoint.replace('page=1', `page=${page}`);
@@ -170,7 +167,6 @@ class MoviePicker {
                 return this.loadRandomMovie(); // Start over with popular movies
             }
             
-            // Pick one random movie from eligible movies
             const randomIndex = Math.floor(Math.random() * eligibleMovies.length);
             const movie = eligibleMovies[randomIndex];
             
@@ -178,7 +174,7 @@ class MoviePicker {
             this.currentMovie = movie;
             this.seenMovies.add(movie.id);
             
-            // Update UI
+            
             this.title.textContent = movie.title;
             this.description.textContent = movie.overview;
             this.rating.textContent = movie.vote_average.toFixed(1);

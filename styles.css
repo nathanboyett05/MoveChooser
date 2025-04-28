@@ -159,7 +159,6 @@ body {
     100% { opacity: 1; }
 }
 
-/* Responsive design */
 @media (max-width: 450px) {
     :root {
         --card-width: 340px;
