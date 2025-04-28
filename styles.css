@@ -1,0 +1,180 @@
+:root {
+    --primary-color: #2a2a2a;
+    --text-color: #ffffff;
+    --accent-color: #ff4d4d;
+    --success-color: #4CAF50;
+    --card-width: 400px;
+    --card-height: 600px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    overflow: hidden;
+}
+
+.container {
+    padding: 20px;
+    perspective: 1000px;
+}
+
+.movie-card {
+    width: var(--card-width);
+    height: var(--card-height);
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    will-change: transform, opacity;
+}
+
+/* Swipe feedback overlays */
+.movie-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+    border-radius: 20px;
+}
+
+.movie-card.swipe-right::before {
+    opacity: 0.3;
+    background: linear-gradient(135deg, var(--success-color) 0%, rgba(76, 175, 80, 0.5) 100%);
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+}
+
+.movie-card.swipe-left::before {
+    opacity: 0.3;
+    background: linear-gradient(135deg, var(--accent-color) 0%, rgba(255, 77, 77, 0.5) 100%);
+    box-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+}
+
+
+.movie-card:active {
+    cursor: grabbing;
+}
+
+.poster-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#moviePoster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.gradient-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.8) 50%,
+        rgba(0, 0, 0, 0.95) 100%
+    );
+}
+
+.movie-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    z-index: 1;
+}
+
+.rating {
+    background: rgba(0, 0, 0, 0.6);
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+#movieRating {
+    color: var(--accent-color);
+    font-size: 1.2em;
+}
+
+.max-rating {
+    opacity: 0.7;
+    font-size: 0.9em;
+}
+
+#movieTitle {
+    font-size: 2em;
+    font-weight: 600;
+    margin-bottom: 15px;
+    line-height: 1.2;
+}
+
+#movieDescription {
+    font-size: 1em;
+    opacity: 0.9;
+    line-height: 1.5;
+    max-height: 6em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+}
+
+/* Loading state */
+.movie-card.loading {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Responsive design */
+@media (max-width: 450px) {
+    :root {
+        --card-width: 340px;
+        --card-height: 520px;
+    }
+
+    .movie-info {
+        padding: 20px;
+    }
+
+    #movieTitle {
+        font-size: 1.5em;
+    }
+
+    #movieDescription {
+        font-size: 0.8em;
+    }
+}

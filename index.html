@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Picker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="movie-card" id="movieCard">
+            <div class="poster-container">
+                <img id="moviePoster" src="" alt="Movie Poster">
+                <div class="gradient-overlay"></div>
+            </div>
+            <div class="movie-info">
+                <div class="rating">
+                    <span id="movieRating">0.0</span>
+                    <span class="max-rating">/10</span>
+                </div>
+                <h1 id="movieTitle">Loading...</h1>
+                <p id="movieDescription">Please wait while we fetch an amazing movie for you...</p>
+            </div>
+            <div class="swipe-indicators">
+                <div class="swipe-left">
+                    <span class="indicator">✕</span>
+                    <span class="label">SKIP</span>
+                </div>
+                <div class="swipe-right">
+                    <span class="indicator">♥</span>
+                    <span class="label">LIKE</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
